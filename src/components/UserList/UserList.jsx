@@ -31,7 +31,7 @@ function UserList() {
     )
 
     return (
-        <div className="container mx-auto p-4 bg-white">
+        <div className="container mx-auto p-4 bg-amber-200">
             <input
                 type="text"
                 className="p-2 border border-gray-300 rounded mb-4 w-full"
@@ -49,8 +49,8 @@ function UserList() {
                 </thead>
                 <tbody>
                     {filteredUsers.map((user) => (
-                        <tr key={user.id} className="bg-white border-b">
-                            <td className="px-4 py-2">{user.name}</td>
+                        <tr key={user.id} className="bg-purple-300 border-b font-black">
+                            <td className="px-4 py-2 ">{user.name}</td>
                             <td className="px-4 py-2">{user.email}</td>
                             <td className="px-4 py-2">{user.phoneNumber}</td>
                         </tr>
