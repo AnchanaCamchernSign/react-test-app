@@ -35,7 +35,7 @@ function RegisterForm() {
     return errors;
   };
 
-  const handleChange = (event) => {
+  const handleChange = (event: { target: { name: string; value: string; }; }) => {
     const { name, value } = event.target;
     setFormData({
       ...formData,
@@ -43,9 +43,14 @@ function RegisterForm() {
     });
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const handleBlur = (event: { target: { name: string; value: string}; }) => {
+    const { name } = event.target;
+    const fieldErrors = validate(formData);
+    setErrors((prev) => ({ ...prev, [name]: fieldErrors[name] }));
+  };
 
+  const handleSubmit = async (event: { preventDefault: () => void; }) => {
+    event.preventDefault();
     const newErrors = validate(formData);
     if (Object.keys(newErrors).length === 0) {
       try {
@@ -53,9 +58,9 @@ function RegisterForm() {
           "https://65a25d5342ecd7d7f0a771bd.mockapi.io/users",
           formData
         );
-
         if (!response.data) throw new Error("Error in form submission");
         alert("Register successfull!");
+        setFormData({ name: "", email: "", phoneNumber: "" });
       } catch (error) {
         console.log("Error: ", error);
         alert("Register fail");
@@ -67,7 +72,6 @@ function RegisterForm() {
 
   return (
     <div className="bg-white m-12 p-4">
-      {/* <h1 className="font-black"> Hello this is a RegisterForm</h1> */}
       <form onSubmit={handleSubmit} className="max-w-sm mx-auto my-8">
         <h1 className="text-3xl mb-2"> Register Form </h1>
         <div className="mb-6 text-left">
@@ -82,6 +86,7 @@ function RegisterForm() {
             id="name"
             name="name"
             onChange={handleChange}
+            onBlur={handleBlur}
             value={formData.name}
             data-testid="name"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
@@ -102,6 +107,7 @@ function RegisterForm() {
             id="email"
             name="email"
             onChange={handleChange}
+            onBlur={handleBlur}
             value={formData.email}
             data-testid="email"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
@@ -122,6 +128,7 @@ function RegisterForm() {
             id="phoneNumber"
             name="phoneNumber"
             onChange={handleChange}
+            onBlur={handleBlur}
             value={formData.phoneNumber}
             data-testid="phoneNumber"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
