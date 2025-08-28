@@ -20,4 +20,9 @@ describe("Counter Component", () => {
         fireEvent.click(screen.getByText("Decrement"))
         expect(screen.getByText("Counter: -1")).toBeInTheDocument()
     })
+
+    it("clear the render counter", () => {
+        fireEvent.click(screen.getByText("Clear"))
+        expect(screen.getByText("Counter: 0")).toBeInTheDocument()
+    })
 })

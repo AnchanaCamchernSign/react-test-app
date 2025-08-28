@@ -8,5 +8,15 @@ export default defineConfig({
     globals: true,
     environment: "jsdom",
     setupFiles: "./test-setup.js",
+    coverage: {
+      exclude: [
+        "postcss.config.js",
+        "tailwind.config.js",
+        "eslint.config.js",
+        "vite.config.js",
+        "src/main.jsx",
+        "src/App.jsx",
+      ],
+    },
   },
 });
