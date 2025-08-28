@@ -31,7 +31,7 @@ function UserList() {
     )
 
     return (
-        <div className="container mx-auto p-4 bg-amber-200">
+        <div className="container mx-auto p-4">
             <input
                 type="text"
                 className="p-2 border border-gray-300 rounded mb-4 w-full"
@@ -40,7 +40,7 @@ function UserList() {
                 onChange={handleSearch}
             />
             <table className="min-w-full table-auto">
-                <thead className="bg-gray-200">
+                <thead className="bg-purple-200">
                     <tr>
                         <th className="px-4 py-2">Name</th>
                         <th className="px-4 py-2">Email</th>
@@ -49,7 +49,7 @@ function UserList() {
                 </thead>
                 <tbody>
                     {filteredUsers.map((user) => (
-                        <tr key={user.id} className="bg-purple-300 border-b font-black">
+                        <tr key={user.id} className="border-b font-black font-mono text-left">
                             <td className="px-4 py-2 ">{user.name}</td>
                             <td className="px-4 py-2">{user.email}</td>
                             <td className="px-4 py-2">{user.phoneNumber}</td>
